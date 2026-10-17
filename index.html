@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06283d">
+<meta name="description" content="درس‌یار دهم — یادگیری آسان، آینده روشن">
+<link rel="manifest" href="manifest.json">
+<title>درس‌یار دهم</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+:root{
+ --navy:#06283d;--navy2:#0a3955;--blue:#38bdf8;--cyan:#14b8a6;--yellow:#facc15;
+ --white:#fff;--ice:#f0f9ff;--text:#0f172a;--muted:#668096;
+ --shadow:0 18px 45px rgba(5,46,72,.15);--soft:0 8px 24px rgba(10,72,110,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#021b2a 0 21%,#eaf8ff 21% 100%);font-family:Vazirmatn,Tahoma,sans-serif;color:var(--text)}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.page{max-width:1440px;margin:auto;background:linear-gradient(180deg,#06283d 0 610px,#eefaff 610px 100%);min-height:100vh}
+.shell{width:min(1280px,calc(100% - 32px));margin:auto}
+.glass{background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.75);box-shadow:var(--shadow);backdrop-filter:blur(16px)}
+/* Header */
+.header{position:sticky;top:10px;z-index:30;padding-top:14px}
+.nav{height:74px;border-radius:24px;padding:10px 18px;display:flex;align-items:center;gap:22px}
+.brand img{width:170px;height:auto;display:block}
+.navlinks{display:flex;align-items:center;gap:26px;margin-right:auto;font-weight:700;color:#0b3d5b}
+.navlinks a{padding:10px 6px;border-radius:12px}
+.navlinks a:hover,.navlinks a.active{background:#dff6ff;color:#078bc2}
+.nav-actions{display:flex;gap:8px}
+.iconbtn{width:44px;height:44px;border:0;border-radius:50%;background:#eef9ff;color:#0b4563;box-shadow:inset 0 1px 0 #fff,0 5px 14px #0b456322}
+.menu{display:none}
+/* Hero */
+.hero{margin-top:12px;border-radius:34px;overflow:hidden;position:relative;min-height:520px;background:#0aa8dc;box-shadow:0 24px 60px #0006}
+.hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,100,150,.03),rgba(2,35,55,.10))}
+.hero-copy{position:absolute;right:7%;top:21%;width:42%;color:white;text-shadow:0 4px 18px #00608055}
+.hero-copy h1{font-size:clamp(42px,5vw,78px);margin:0 0 8px;font-weight:800;letter-spacing:-2px}
+.hero-copy h1 span{color:var(--yellow)}
+.hero-copy h2{font-size:clamp(23px,2.5vw,40px);margin:0 0 18px}
+.hero-copy p{font-size:18px;line-height:2;margin:0 0 24px}
+.primary{border:0;border-radius:18px;padding:14px 28px;background:linear-gradient(180deg,#ffe75b,#f5bd00);color:#143149;font-weight:800;box-shadow:0 8px 0 #c28f00,0 14px 25px #003e5555}
+.primary:active{transform:translateY(5px);box-shadow:0 3px 0 #c28f00}
+/* Quick cards */
+.quick{position:relative;margin:-72px 18px 0;z-index:3;padding:14px;border-radius:28px;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.qcard{border:1px solid #d9edf8;border-radius:22px;background:linear-gradient(180deg,#fff,#f3fbff);padding:18px 12px;text-align:center;min-height:132px;box-shadow:var(--soft);transition:.25s}
+.qcard:hover{transform:translateY(-7px) rotateX(2deg)}
+.qicon{font-size:38px;display:block;margin-bottom:6px}
+.qcard strong{display:block;font-size:15px}
+.qcard small{display:block;color:#4c7890;margin-top:5px}
+/* Main dashboard */
+.dashboard{background:#f2fbff;padding:30px 0 70px;margin-top:-1px}
+.layout{display:grid;grid-template-columns:250px 1fr;gap:18px;align-items:start}
+.sidebar{border-radius:26px;padding:18px;position:sticky;top:100px}
+.sidebar-brand{display:flex;align-items:center;gap:8px;padding:6px 5px 18px;font-weight:800;color:#087cb1}
+.sideitem{display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;text-align:right;padding:12px;border-radius:14px;color:#527085;margin:3px 0}
+.sideitem:hover,.sideitem.active{background:#14b8a6;color:#fff;box-shadow:0 7px 16px #14b8a633}
+.maincol{min-width:0}
+.welcome{display:flex;justify-content:space-between;align-items:center;gap:16px;border-radius:24px;padding:18px 22px;margin-bottom:16px}
+.welcome h3{margin:0 0 4px;font-size:20px}.welcome p{margin:0;color:var(--muted);font-size:13px}
+.progressbox{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;min-width:350px}
+.level{width:52px;height:52px;border-radius:16px;background:linear-gradient(145deg,#16d0d0,#00a5bf);color:#fff;display:grid;place-items:center;font-weight:800;font-size:21px;box-shadow:inset 0 2px 0 #fff8,0 8px 18px #008da844}
+.bar{height:11px;background:#e4f3f9;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#14b8a6,#38bdf8);border-radius:99px}
+.xp{font-size:12px;color:#31556b;white-space:nowrap}
+/* feature cards */
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.feature{border-radius:25px;min-height:145px;padding:22px;position:relative;overflow:hidden;box-shadow:var(--shadow);border:1px solid #fff}
+.feature h3{margin:0 0 8px;font-size:20px}.feature p{margin:0 0 14px;font-size:13px;opacity:.82}.feature button{border:0;border-radius:14px;padding:9px 16px;font-weight:800}
+.f1{background:linear-gradient(135deg,#11c9bc,#38dbe8);color:#063e4a}.f2{background:linear-gradient(135deg,#ffe32e,#ffc51c);color:#4b3900}.f3{background:linear-gradient(135deg,#3cc7ff,#1699ec);color:#fff}
+.feature .bigicon{position:absolute;left:18px;bottom:10px;font-size:60px;filter:drop-shadow(0 10px 10px #0002)}
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.card{background:#fff;border-radius:20px;padding:18px 12px;text-align:center;border:1px solid #d9eef7;box-shadow:var(--soft);transition:.25s}
+.card:hover{transform:translateY(-5px)}.card .ico{font-size:34px;display:block}.card strong{display:block;margin-top:5px}.card small{color:#6a8797}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:26px 0 12px}.section-title h2{font-size:20px;margin:0}.section-title span{color:#6b8798;font-size:12px}
+.subjects{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.subject{background:#fff;border-radius:20px;padding:16px;border:1px solid #d9eef7;box-shadow:var(--soft)}.subject b{display:block}.subject .mini{margin-top:12px;height:7px;background:#edf6fa;border-radius:99px;overflow:hidden}.subject .mini i{display:block;height:100%;width:0;background:#14b8a6}
+.two{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin-top:16px}.panel{background:#fff;border-radius:24px;padding:20px;border:1px solid #d9eef7;box-shadow:var(--soft)}
+.panel h3{margin:0 0 14px}.list{display:grid;gap:9px}.row{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;background:#f4fbfe;border-radius:14px}.row button{border:0;border-radius:10px;padding:7px 11px;background:#14b8a6;color:#fff}
+.footer{background:#06283d;color:#cfe9f4;padding:34px 0}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}.footer a{color:#fff}
+/* Study chapter list: polished, readable, mobile-friendly */
+.lesson-kicker{display:inline-block;background:#dff7ff;color:#087eaf;border-radius:99px;padding:6px 12px;font-size:12px;font-weight:800;margin-bottom:12px}
+.lesson-callout{padding:16px;border-radius:16px;background:#eafaff;border-right:4px solid #14b8a6;margin:16px 0}
+.lesson-callout p{margin:6px 0 0}
+.lesson-note{font-size:13px;color:#61798a!important}
+.chapter-list{display:grid;gap:16px;margin-top:18px}
+.chapter{background:linear-gradient(145deg,#fff,#f3fbff);border:1px solid #d7edf7;border-radius:22px;padding:20px;box-shadow:0 10px 28px rgba(5,46,72,.09);margin:14px 0}
+.chapter h4{font-size:18px;line-height:1.9;margin:0 0 8px;color:#073b59}
+.chapter p{color:#547084;line-height:2;margin:0 0 14px}
+.lesson-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 14px;margin-top:9px;border:1px solid #e0eff6;border-radius:15px;background:#fff;transition:background .18s,border-color .18s,transform .18s}
+.lesson-row:hover{background:#eefaff;border-color:#8ed8f2;transform:translateY(-1px)}
+.lesson-row span{font-weight:600;line-height:1.8;color:#173b50}
+.lesson-row button{flex:0 0 auto;border:0;border-radius:12px;padding:10px 17px;background:linear-gradient(135deg,#087eaf,#14b8a6);color:white;font-weight:800;box-shadow:0 5px 12px #087eaf25}
+.lesson-row button:active{transform:scale(.97)}
+@media(max-width:600px){.chapter{padding:14px;border-radius:18px}.chapter h4{font-size:16px}.lesson-row{align-items:stretch;flex-direction:column;gap:9px;padding:12px}.lesson-row button{width:100%}}
+/* Modals / utilities */
+.modal{position:fixed;inset:0;background:#00131ecc;backdrop-filter:blur(8px);z-index:80;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}
+.modalbox{width:min(720px,100%);background:#fff;border-radius:28px;padding:24px;box-shadow:0 30px 80px #0008}.modalbox h2{margin-top:0}.close{border:0;border-radius:12px;padding:10px 16px;background:#0f172a;color:#fff}.teacher input{padding:12px;border:1px solid #cbd5e1;border-radius:12px;width:100%;margin:10px 0}.teacher button{border:0;border-radius:12px;background:#14b8a6;color:#fff;padding:11px 15px;font-weight:800}
+.toast{position:fixed;bottom:20px;right:20px;background:#0f172a;color:#fff;padding:12px 16px;border-radius:14px;display:none;z-index:90}
+#teacherPanel{display:none}.teacher-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.teacher-grid .card{text-align:right}
+/* Mobile */
+@media(max-width:900px){
+ body{background:#eaf8ff}.page{background:#eefaff}.shell{width:min(100% - 20px,700px)}
+ .header{top:0}.nav{height:64px;border-radius:0 0 18px 18px;padding:8px 12px}.brand img{width:132px}.navlinks{display:none}.menu{display:block;margin-right:auto}.iconbtn{width:38px;height:38px}
+ .hero{min-height:560px;border-radius:22px;margin-top:10px}.hero-image{object-position:57% center}.hero-copy{right:6%;top:48%;width:88%;text-align:right}.hero-copy h1{font-size:43px}.hero-copy h2{font-size:22px}.hero-copy p{font-size:14px}.quick{margin:-38px 7px 0;grid-template-columns:repeat(2,1fr);padding:9px}.qcard{min-height:118px}
+ .layout{grid-template-columns:1fr}.sidebar{position:static;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px}.sidebar-brand{display:none}.sideitem{justify-content:center;padding:9px;font-size:11px;flex-direction:column;gap:3px}.sideitem:nth-child(n+9){display:none}
+ .welcome{display:block}.progressbox{min-width:0;margin-top:15px}.feature-grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.subjects{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}.teacher-grid{grid-template-columns:1fr}
+ .footer-inner{display:block;text-align:center}.footer{padding-bottom:90px}
+}
+@media(max-width:390px){.hero-copy{top:44%}.hero-copy h1{font-size:37px}.quick{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}.subjects{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="shell">
+<header class="header">
+<nav class="nav glass">
+<a class="brand" href="#home"><img src="assets/logo.png" alt="درس‌یار دهم"></a>
+<div class="navlinks">
+<a class="active" href="#home">خانه</a><a href="#lessons">درس‌ها</a><a href="#notes">جزوه‌ها</a><a href="#tests">آزمون‌ها</a><a href="#tools">ابزارها</a><a href="#videos">ویدیوها</a><a href="#more">بیشتر</a>
+</div>
+<div class="nav-actions"><button class="iconbtn" id="themeBtn">🌙</button><button class="iconbtn" id="notifyBtn">🔔</button></div>
+<button class="iconbtn menu" id="menuBtn">☰</button>
+</nav>
+</header>
+
+<section id="home" class="hero">
+<img class="hero-image" src="assets/hero-reference.jpg" alt="">
+<div class="hero-overlay"></div>
+<div class="hero-copy">
+<h1>درس‌یار <span>دهم</span></h1>
+<h2>یادگیری آسان، آینده روشن</h2>
+<p>با امکانات هوشمند و ابزارهای کاربردی، به بهترین نسخه خودت تبدیل شو!</p>
+<button class="primary" data-open="study">شروع کن ←</button>
+</div>
+</section>
+
+<section class="quick glass">
+<div class="qcard" data-open="videos"><span class="qicon">▶️</span><strong>ویدیوهای آموزشی</strong><small>یادگیری تصویری</small></div>
+<div class="qcard" data-open="notes"><span class="qicon">📘</span><strong>جزوه‌ها</strong><small>دسترسی سریع</small></div>
+<div class="qcard" data-open="mistakes"><span class="qicon">📕</span><strong>دفتر اشتباهات</strong><small>یادگیری از اشتباهات</small></div>
+<div class="qcard" data-open="timer"><span class="qicon">⏱️</span><strong>تایمر مطالعه</strong><small>تمرکز بیشتر</small></div>
+<div class="qcard" data-open="goals"><span class="qicon">🎯</span><strong>هدف‌گذاری</strong><small>رسیدن به رویاها</small></div>
+<div class="qcard" data-open="stats"><span class="qicon">📊</span><strong>آمار شخصی</strong><small>بررسی پیشرفت و عملکرد</small></div>
+</section>
+</div>
+
+<main class="dashboard">
+<div class="shell">
+<div class="layout">
+<aside class="sidebar glass">
+<div class="sidebar-brand">🎓 درس‌یار دهم</div>
+<button class="sideitem active" data-scroll="home">🏠 داشبورد</button>
+<button class="sideitem" data-scroll="lessons">📚 درس‌ها</button>
+<button class="sideitem" data-scroll="notes">📘 جزوه‌ها</button>
+<button class="sideitem" data-scroll="tests">📝 آزمون‌ها</button>
+<button class="sideitem" data-scroll="tools">🧮 ابزارهای درسی</button>
+<button class="sideitem" data-scroll="videos">▶️ ویدیوها</button>
+<button class="sideitem" data-scroll="plan">📅 برنامه مطالعه</button>
+<button class="sideitem" data-scroll="mistakes">📝 دفتر اشتباهات</button>
+<button class="sideitem" data-scroll="favorites">❤️ علاقه‌مندی‌ها</button>
+<button class="sideitem" data-scroll="stats">📊 آمار شخصی</button>
+<button class="sideitem" data-scroll="goals">🎯 هدف‌گذاری</button>
+<button class="sideitem" data-open="teacher">👨‍🏫 پنل معلم</button>
+</aside>
+
+<section class="maincol">
+<div class="welcome glass">
+<div><h3>سلام امیر 👋</h3><p>امروز یک قدم دیگر به موفقیت نزدیک‌تر شو.</p></div>
+<div class="progressbox">
+<div class="level" id="level">1</div>
+<div><div class="xp">سطح <b id="levelText">1</b> — XP <b id="xpText">0 / 100</b></div><div class="bar"><i id="xpBar"></i></div></div>
+<div>⭐<br><small id="percent">0%</small></div>
+</div>
+</div>
+
+<div class="feature-grid">
+<div class="feature f1" id="plan"><span class="bigicon">📅</span><h3>برنامه امروز</h3><p>۳ درس در انتظار مطالعه</p><button onclick="addXP(5)">مشاهده برنامه ←</button></div>
+<div class="feature f2" id="notes"><span class="bigicon">📖</span><h3>ادامه مطالعه</h3><p>ریاضی | فصل ۱ | مجموعه‌ها</p><button data-open="notes">ادامه بده ←</button></div>
+<div class="feature f3" id="timer"><span class="bigicon">⏱️</span><h3>تایمر مطالعه</h3><p>تمرکز کن، یاد بگیر، پیشرفت کن.</p><button data-open="timer">شروع ←</button></div>
+</div>
+
+<div class="cards" id="lessons">
+<div class="card" data-open="lessons"><span class="ico">📚</span><strong>درس‌ها</strong><small>مشاهده همه</small></div>
+<div class="card" data-open="notes"><span class="ico">📂</span><strong>جزوه‌ها</strong><small>دسترسی سریع</small></div>
+<div class="card" data-open="tests"><span class="ico">📝</span><strong>آزمون‌ها</strong><small>شروع آزمون</small></div>
+<div class="card" data-open="videos"><span class="ico">▶️</span><strong>ویدیوهای آموزشی</strong><small>مشاهده ویدیو</small></div>
+<div class="card" data-open="tools"><span class="ico">🧮</span><strong>ابزارهای درسی</strong><small>ابزارهای کاربردی</small></div>
+<div class="card" id="mistakes" data-open="mistakes"><span class="ico">📕</span><strong>دفتر اشتباهات</strong><small>مرور اشتباهات</small></div>
+<div class="card" id="favorites" data-open="favorites"><span class="ico">❤️</span><strong>علاقه‌مندی‌ها</strong><small>محفوظات من</small></div>
+<div class="card" data-open="more"><span class="ico">📝</span><strong>یادداشت‌ها</strong><small>یادداشت‌های شخصی</small></div>
+<div class="card" id="goals" data-open="goals"><span class="ico">🎯</span><strong>هدف‌گذاری</strong><small>تنظیم اهداف</small></div>
+<div class="card" id="stats" data-open="stats"><span class="ico">📊</span><strong>آمار شخصی</strong><small>مشاهده آمار</small></div>
+</div>
+
+<div class="section-title"><h2>درس‌های من</h2><span>پیشرفت شخصی، بدون رتبه‌بندی</span></div>
+<div class="subjects">
+<div class="subject"><b>📐 ریاضی</b><small>فصل ۱ · مجموعه‌ها</small><div class="mini"><i id="mathBar"></i></div></div>
+<div class="subject"><b>⚛️ فیزیک</b><small>فصل ۱ · اندازه‌گیری</small><div class="mini"><i id="physicsBar"></i></div></div>
+<div class="subject"><b>🧪 شیمی</b><small>فصل ۱ · ساختار اتم</small><div class="mini"><i id="chemBar"></i></div></div>
+<div class="subject"><b>📖 فارسی</b><small>فصل ۱ · ادبیات</small><div class="mini"><i id="persianBar"></i></div></div>
+</div>
+
+<div class="two">
+<div class="panel" id="tests"><h3>📝 آزمون حرفه‌ای</h3><div class="list">
+<div class="row"><span>آزمون ریاضی — آسان</span><button data-open="test">شروع</button></div>
+<div class="row"><span>آزمون فیزیک — متوسط</span><button data-open="test">شروع</button></div>
+<div class="row"><span>آزمون تصادفی — ترکیبی</span><button data-open="test">شروع</button></div>
+</div></div>
+<div class="panel" id="tools"><h3>🧮 ابزارهای درسی</h3><div class="list">
+<div class="row"><span>ماشین‌حساب</span><button data-open="calc">باز کن</button></div>
+<div class="row"><span>فرمول‌نامه</span><button data-open="formulas">مشاهده</button></div>
+<div class="row"><span>پومودورو</span><button data-open="timer">شروع</button></div>
+</div></div>
+</div>
+
+<div class="two">
+<div class="panel" id="videos"><h3>▶️ ویدیوهای آموزشی</h3><p>ویدیوهای هر مبحث را از منابع معتبر اضافه کن. لینک جعلی تولید نمی‌شود.</p><button class="primary" data-open="videos">مشاهده ویدیوها</button></div>
+<div class="panel"><h3>🤖 مسیر یادگیری هوشمند</h3><p id="smartText">با نتایج آزمون‌ها، نقاط نیازمند تمرین را پیدا کن و تمرین پیشنهادی بگیر.</p><button class="primary" data-open="ai">دستیار هوشمند</button></div>
+</div>
+
+<div class="two">
+<div class="panel"><h3>📚 برنامه مطالعه</h3><div class="list">
+<div class="row"><span>ریاضی — ۳۰ دقیقه</span><button onclick="addXP(5)">✓</button></div>
+<div class="row"><span>فیزیک — ۲۰ دقیقه</span><button onclick="addXP(5)">✓</button></div>
+<div class="row"><span>مرور اشتباهات — ۱۵ دقیقه</span><button onclick="addXP(5)">✓</button></div>
+</div></div>
+<div class="panel"><h3>🎯 هدف امروز</h3><p>امروز ۶۰ دقیقه مطالعه هدف‌گذاری شده است.</p><div class="bar"><i id="goalBar"></i></div><button class="primary" onclick="addXP(10);toast('۱۰ XP برای هدف امروز ثبت شد')">ثبت پیشرفت</button></div>
+</div>
+</section>
+</div>
+</div>
+</main>
+
+<footer class="footer" id="more"><div class="shell footer-inner"><div>🎓 درس‌یار دهم — یادگیری آسان، آینده روشن</div><div><a href="https://eitaa.com/amirmahdi_Admin" target="_blank" rel="noopener">ارتباط در ایتا</a> · <span>بدون ثبت‌نام دانش‌آموز</span></div></div></footer>
+</div>
+
+<div class="modal" id="modal"><div class="modalbox"><h2 id="modalTitle"></h2><div id="modalBody"></div><button class="close" onclick="closeModal()">بستن</button></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+const modal=$('#modal'), modalTitle=$('#modalTitle'), modalBody=$('#modalBody');
+function openModal(type){
+ let title='';let body='';
+ if(type==='lessons'){showBooks();return;}
+ const map={
+  study:['شروع یادگیری',`<div class="chapter-list"><div class="chapter"><h4>📐 ریاضی</h4><p>فصل‌ها را انتخاب کن و مطالعه را ادامه بده.</p><button class="primary" onclick="showBooks()">مشاهده درس‌ها</button></div><div class="chapter"><h4>⚛️ فیزیک</h4><p>آماده مطالعه و آزمون.</p><button class="primary" onclick="showSubject('physics')">باز کردن</button></div><div class="chapter"><h4>🧪 شیمی</h4><p>آماده مطالعه و مرور.</p><button class="primary" onclick="showSubject('chemistry')">باز کردن</button></div></div>`],
+  videos:['ویدیوهای آموزشی',`<div class="chapter-list"><div class="chapter"><h4>▶️ ویدیوهای آموزشی</h4><p>لینک‌های ویدیویی را از منابع معتبر انتخاب کن.</p><a class="primary" href="https://www.aparat.com/" target="_blank" rel="noopener" style="display:inline-block">ورود به آپارات</a></div></div>`],
+  notes:['جزوه‌ها',`<div class="chapter-list"><div class="chapter"><h4>📘 جزوه ریاضی</h4><p>جزوه‌ها را بر اساس فصل و مبحث مرتب کن.</p><button class="primary" onclick="showBooks()">رفتن به فصل‌ها</button></div><div class="chapter"><h4>📘 دفتر یادداشت من</h4><textarea id="noteText" style="width:100%;min-height:130px;border:1px solid #cbd5e1;border-radius:14px;padding:12px" placeholder="یادداشتت را بنویس..."></textarea><br><button class="primary" onclick="saveNote()">ذخیره یادداشت</button></div></div>`],
+  mistakes:['دفتر اشتباهات',`<div class="chapter"><p>اشتباهات آزمون‌ها اینجا ذخیره می‌شوند.</p><div id="mistakeList">هنوز اشتباهی ثبت نشده است.</div></div>`],
+  goals:['هدف‌گذاری',`<div class="chapter"><h4>🎯 هدف امروز</h4><input id="goalInput" type="number" min="1" placeholder="دقیقه مطالعه" style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:12px"><br><br><button class="primary" onclick="saveGoal()">ثبت هدف</button><p id="goalResult"></p></div>`],
+  stats:['آمار شخصی',`<div class="chapter"><h4>📊 آمار تو</h4><p>XP: <b id="statsXp">${xp}</b></p><p>سطح: <b id="statsLevel">${Math.floor(xp/100)+1}</b></p><p>تعداد یادداشت‌ها: <b id="statsNotes">${localStorage.getItem('darsyar_notes')?'1':'0'}</b></p><p>هدف مطالعه: <b>${localStorage.getItem('darsyar_goal')||'ثبت نشده'}</b></p></div>`],
+  tests:['آزمون حرفه‌ای',`<div class="chapter-list"><div class="chapter"><h4>آزمون ریاضی — آسان</h4><p>۵ سؤال، زمان پیشنهادی ۵ دقیقه.</p><button class="primary" onclick="openModal('test')">شروع آزمون</button></div><div class="chapter"><h4>آزمون تصادفی</h4><p>آزمون نمونه ترکیبی.</p><button class="primary" onclick="openModal('test')">شروع</button></div></div>`],
+  test:['آزمون',''],
+  tools:['ابزارهای درسی',`<div class="chapter-list"><div class="chapter"><h4>🧮 ماشین‌حساب</h4><input id="calcInput" placeholder="مثلاً 25*4" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:12px"><br><br><button class="primary" onclick="calc()">محاسبه</button><div id="calcResult"></div></div><div class="chapter"><h4>⏱️ پومودورو</h4><button class="primary" onclick="openModal('timer')">شروع تایمر</button></div></div>`],
+  calc:['ماشین‌حساب',''],
+  formulas:['فرمول‌نامه',`<div class="chapter-list"><div class="chapter"><h4>📐 ریاضی</h4><p>فرمول‌های مهم هر فصل را می‌توان اینجا دسته‌بندی کرد.</p></div><div class="chapter"><h4>⚛️ فیزیک</h4><p>فرمول‌ها بر اساس فصل و موضوع نمایش داده می‌شوند.</p></div></div>`],
+  ai:['دستیار هوشمند',`<div class="chapter"><h4>🤖 سؤال خودت را بنویس</h4><textarea id="aiQuestion" style="width:100%;min-height:120px;border:1px solid #cbd5e1;border-radius:14px;padding:12px" placeholder="مثلاً تابع چیست؟"></textarea><br><button class="primary" onclick="aiHelp()">توضیح بده</button><p id="aiResult"></p></div>`],
+  favorites:['علاقه‌مندی‌ها',`<div class="chapter"><p>فعلاً محتوای ذخیره‌شده‌ای نداری.</p><button class="primary" onclick="toast('برای ذخیره، روی محتوای موردنظر دکمه علاقه‌مندی را بزن')">راهنما</button></div>`],
+  more:['یادداشت شخصی',`<div class="chapter"><textarea id="noteText" style="width:100%;min-height:150px;border:1px solid #cbd5e1;border-radius:14px;padding:12px" placeholder="یادداشت شخصی..."></textarea><br><button class="primary" onclick="saveNote()">ذخیره</button></div>`],
+  teacher:['پنل معلم',`<div class="teacher"><input id="teacherPass" inputmode="numeric" maxlength="4" placeholder="رمز معلم"><button class="primary" onclick="teacherLogin()">ورود</button></div>`]
+ };
+ [title,body]=map[type]||['درس‌یار دهم','این بخش آماده است.'];
+ modalTitle.textContent=title;modalBody.innerHTML=body;modal.classList.add('open');
+ if(type==='teacher') $('.teacher').style.display='block';
+ if(type==='timer') setupTimer();
+ if(type==='test') setupTest();
+}
+
+function showSubject(name){
+ modalTitle.textContent=name==='physics'?'فیزیک ۱ — پایه دهم':name==='chemistry'?'شیمی ۱ — پایه دهم':'فارسی ۱ — پایه دهم';
+ modalBody.innerHTML='<div class="chapter"><h4>فصل‌های این درس</h4><p>برای ارائه محتوای دقیق فصل‌به‌فصل باید متن کتاب همان درس در فایل‌های پروژه موجود باشد. ساختار این بخش آماده است.</p><button class="primary" onclick="toast(\'ساختار درس آماده است\')">ادامه</button></div>';
+}
+function showBooks(){
+ modalTitle.textContent='همه درس‌ها';
+ modalBody.innerHTML='<p>یک درس را انتخاب کن:</p><div class="lessons-books"><div class="book" onclick="showBook(\'math\')"><h3>📐 ریاضی</h3><small>۷ فصل</small></div><div class="book" onclick="showSubject(\'physics\')"><h3>⚛️ فیزیک</h3><small>فصل‌به‌فصل</small></div><div class="book" onclick="showSubject(\'chemistry\')"><h3>🧪 شیمی</h3><small>فصل‌به‌فصل</small></div><div class="book" onclick="showSubject(\'persian\')"><h3>📖 فارسی</h3><small>فصل‌به‌فصل</small></div></div>';
+ modal.classList.add('open');
+}
+const mathChapters=[
+ ['فصل ۱: مجموعه، الگو و دنباله','مجموعه‌های متناهی و نامتناهی، متمم یک مجموعه، الگو و دنباله، دنباله‌های حسابی و هندسی.',['مجموعه‌های متناهی و نامتناهی','متمم یک مجموعه','الگو و دنباله','دنباله‌های حسابی و هندسی']],
+ ['فصل ۲: مثلثات','نسبت‌های مثلثاتی، دایره مثلثاتی و روابط بین نسبت‌های مثلثاتی.',['نسبت‌های مثلثاتی','دایره مثلثاتی','روابط بین نسبت‌های مثلثاتی']],
+ ['فصل ۳: توان‌های گویا و عبارت‌های جبری','ریشه و توان، ریشه nام، توان‌های گویا و عبارت‌های جبری.',['ریشه و توان','ریشه nام','توان‌های گویا','عبارت‌های جبری']],
+ ['فصل ۴: معادله‌ها و نامعادله‌ها','معادله درجه دوم و روش‌های مختلف حل آن، سهمی و تعیین علامت.',['معادله درجه دوم و روش‌های مختلف حل آن','سهمی','تعیین علامت']],
+ ['فصل ۵: تابع','مفهوم تابع و بازنمایی‌های آن، دامنه و برد توابع و انواع تابع.',['مفهوم تابع و بازنمایی‌های آن','دامنه و برد توابع','انواع تابع']],
+ ['فصل ۶: شمارش، بدون شمردن','شمارش، جایگشت و ترکیب.',['شمارش','جایگشت','ترکیب']],
+ ['فصل ۷: آمار و احتمال','احتمال یا اندازه‌گیری شانس، مقدمه‌ای بر علم آمار، جامعه و نمونه، متغیر و انواع آن.',['احتمال یا اندازه‌گیری شانس','مقدمه‌ای بر علم آمار، جامعه و نمونه','متغیر و انواع آن']]
+];
+function showBook(key){
+ if(key!=='math'){showSubject(key);return;}
+ modalTitle.textContent='ریاضی ۱ — پایه دهم';
+ let h='<p>فصل موردنظر را انتخاب کن:</p><div class="chapter-list">';
+ mathChapters.forEach((c,i)=>{h+='<div class="chapter"><h4>'+c[0]+'</h4><p>'+c[1]+'</p>';c[2].forEach((x,j)=>h+='<div class="lesson-row"><span>مبحث '+(j+1)+' — '+x+'</span><button onclick="showLesson('+i+','+j+')">باز کردن</button></div>');h+='</div>'});
+ modalBody.innerHTML=h+'</div>';
+}
+function showLesson(ci,li){const c=mathChapters[ci],name=c[2][li];modalTitle.textContent=name;modalBody.innerHTML='<div class="chapter lesson-content"><div class="lesson-kicker">ریاضی ۱ · پایه دهم</div><h4>'+name+'</h4><p>'+c[0]+'</p><div class="lesson-callout"><b>موضوع این مبحث</b><p>'+c[1]+'</p></div><p class="lesson-note">برای نمایش درس‌نامه‌ی کامل، مثال‌های حل‌شده و تمرین‌های این بخش باید محتوای آموزشی معتبر به سایت اضافه شود. این صفحه فعلاً فقط عنوان و توضیح کلی مبحث را دارد.</p><button class="primary" onclick="closeModal()">بازگشت به فهرست مباحث</button></div>'}
+function saveNote(){const v=$('#noteText')?.value||'';if(v){localStorage.setItem('darsyar_notes',v);toast('یادداشت ذخیره شد ✅')}else toast('اول یادداشتت را بنویس')}
+function saveGoal(){const v=$('#goalInput')?.value;if(v){localStorage.setItem('darsyar_goal',v+' دقیقه');$('#goalResult').textContent='هدف '+v+' دقیقه ذخیره شد ✅';}else toast('مدت هدف را وارد کن')}
+function aiHelp(){const q=$('#aiQuestion')?.value.trim();if(!q){toast('سؤالت را بنویس');return}$('#aiResult').textContent='برای «'+q+'» ابتدا مبحث را مشخص کن؛ سپس توضیح مرحله‌ای و تمرین مرتبط نمایش داده می‌شود.'}
+
+function closeModal(){modal.classList.remove('open')}
+window.openModal=openModal;
+window.closeModal=closeModal;
+document.addEventListener('click', function(e){
+  const openEl=e.target.closest('[data-open]');
+  if(openEl){
+    e.preventDefault();
+    e.stopPropagation();
+    openModal(openEl.dataset.open);
+    return;
+  }
+  const scrollEl=e.target.closest('[data-scroll]');
+  if(scrollEl){
+    e.preventDefault();
+    const target=document.getElementById(scrollEl.dataset.scroll);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+});
+$('#menuBtn').onclick=()=>openModal('more');
+$('#notifyBtn').onclick=()=>toast('🔥 برنامه امروزت آماده است!');
+$('#themeBtn').onclick=()=>{
+ document.body.classList.toggle('dark');
+ document.body.style.filter=document.body.classList.contains('dark')?'brightness(.82)':'';
+ toast(document.body.classList.contains('dark')?'حالت شب فعال شد 🌙':'حالت روشن فعال شد ☀️');
+};
+function toast(t){const x=$('#toast');x.textContent=t;x.style.display='block';clearTimeout(window.tt);window.tt=setTimeout(()=>x.style.display='none',2200)}
+function teacherLogin(){if($('#teacherPass').value==='8888'){modalTitle.textContent='پنل معلم';modalBody.innerHTML='<div class="teacher-grid"><div class="card">📝 ساخت آزمون<br><small>آزمون جدید ایجاد کن</small></div><div class="card">📋 تکلیف<br><small>تکلیف ارسال کن</small></div><div class="card">📊 نتایج<br><small>گزارش عملکرد</small></div><div class="card">👨‍🎓 دانش‌آموزان<br><small>نمایش داده‌های محلی</small></div></div>'}else toast('رمز معلم اشتباه است')}
+function calc(){try{$('#calcResult').textContent='نتیجه: '+Function('return '+$('#calcInput').value)()}catch{toast('عبارت نامعتبر است')}}
+
+let timerInterval=null, timerSeconds=1500;
+function setupTimer(){
+  clearInterval(timerInterval);
+  timerSeconds=1500;
+  const d=$('#timerDisplay'), start=$('#startTimer'), reset=$('#resetTimer');
+  if(!d||!start||!reset)return;
+  const render=()=>{const m=String(Math.floor(timerSeconds/60)).padStart(2,'0'),sec=String(timerSeconds%60).padStart(2,'0');d.textContent=m+':'+sec};
+  render();
+  start.onclick=()=>{
+    clearInterval(timerInterval);
+    start.textContent='در حال اجرا...';
+    timerInterval=setInterval(()=>{
+      timerSeconds--;
+      render();
+      if(timerSeconds<=0){clearInterval(timerInterval);start.textContent='پایان';addXP(10);toast('جلسه مطالعه تمام شد؛ ۱۰ XP گرفتی ⭐')}
+    },1000);
+  };
+  reset.onclick=()=>{clearInterval(timerInterval);timerSeconds=1500;start.textContent='شروع';render()};
+}
+function setupTest(){
+  modalBody.innerHTML='<div><p>یک آزمون نمونه ۵ سؤالی:</p><div class="list">'+
+  '<div class="row"><span>۱) اگر A={1,2,3} باشد، تعداد اعضای A چند است؟</span><button class="test-answer" data-ok="1">۳</button></div>'+
+  '<div class="row"><span>۲) 2+3×4 چند می‌شود؟</span><button class="test-answer" data-ok="0">۲۰</button></div>'+
+  '<div class="row"><span>۳) کدام گزینه یک کمیت برداری است؟</span><button class="test-answer" data-ok="1">جابجایی</button></div>'+
+  '<div class="row"><span>۴) واحد SI زمان چیست؟</span><button class="test-answer" data-ok="1">ثانیه</button></div>'+
+  '<div class="row"><span>۵) 10÷2 چند است؟</span><button class="test-answer" data-ok="1">۵</button></div></div><p id="testScore" style="font-weight:800;margin-top:14px">امتیاز: ۰ از ۵</p></div>';
+  let score=0, answered=0;
+  modalBody.querySelectorAll('.test-answer').forEach(btn=>btn.onclick=()=>{
+    if(btn.disabled)return;
+    btn.disabled=true; answered++;
+    if(btn.dataset.ok==='1'){score++;btn.textContent+=' ✓';}
+    else btn.textContent+=' ✗';
+    $('#testScore').textContent='امتیاز: '+score+' از ۵';
+    if(answered===5){addXP(score*5);toast('آزمون تمام شد؛ '+(score*5)+' XP دریافت کردی ⭐')}
+  });
+}
+
+let xp=Number(localStorage.getItem('darsyar_xp')||0);
+function updateXP(){const level=Math.floor(xp/100)+1;const within=xp%100;$('#xpText').textContent=within+' / 100';$('#level').textContent=level;$('#levelText').textContent=level;$('#xpBar').style.width=within+'%';$('#percent').textContent=within+'%';}
+function addXP(n){xp+=n;localStorage.setItem('darsyar_xp',xp);updateXP();toast('+'+n+' XP ثبت شد ⭐')}
+updateXP();
+$('#modal').addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>
